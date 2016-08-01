@@ -93,6 +93,14 @@ var idVal = 0;
 
 $(document).ready(function () {
 
+    $('#postsCommentPlugin').on('input', function () {
+        try
+        {
+            $('#postsCommentPluginValue').val(window.btoa($('#postsCommentPlugin').val()));
+        }catch(e){};
+       
+    });
+
     $('#forgotten').on('click', function () {
         var email = $('#Email').val();
         if (CheckMail(email)) {

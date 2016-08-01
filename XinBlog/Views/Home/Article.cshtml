@@ -57,23 +57,6 @@
                         </div>
                     </footer>
                 </article>
-
-                @*<div class="about-author clearfix">
-                        <a href="/author/stosc/"><img src="" alt="stosc" class="avatar pull-left"></a>
-
-                        <div class="details">
-                            <div class="author">
-                                关于作者 <a href="/author/stosc/">stosc</a>
-                            </div>
-                            <div class="meta-info">
-                                <span class="loaction"><i class="fa fa-home"></i>北京</span>
-                                <span class="website"><i class="fa fa-globe"></i><a href="http://stosc.cc" targer="_blank">个人网站/博客</a></span>
-                            </div>
-                            <div class="bio">
-                                Asp.net MVC 开源博客 XinBlog 作者。
-                            </div>
-                        </div>
-                    </div>*@
                 @if (ViewBag.IsPre != null)
                 {
                     <div class="prev-next-wrap clearfix">
@@ -96,21 +79,17 @@
                             <a class="btn btn-default" href="/Blog/">这是第一篇 <i class="fa fa-angle-right fa-fw"></i></a>
                         }
                     </div>
+                   
 
-                    <div class="post tag-laravel-5 tag-getting-started-with-laravel tag-laravel-5-2">
+                }
 
-                        <div id="SOHUCS" sid="@Model.Id"></div>
-                        <script type="text/javascript">
-                            (function () {
-                                var appid = 'cysuFfpdk';
-                                var conf = 'prod_1b5668eada44a2a7522d9ef0be50b0e8';
-                                var width = window.innerWidth || document.documentElement.clientWidth;
-                                if (width < 960) {
-                                    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
-                                } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("http://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
-                            })(); </script>
+                @if (!string.IsNullOrEmpty(ViewBag.CommentPlugin))
+                {
+                <div class="post tag-laravel-5 tag-getting-started-with-laravel tag-laravel-5-2">
 
-                    </div>
+                    @Html.Raw(ViewBag.CommentPlugin)
+
+                </div>
                 }
             </main>           
         </div>

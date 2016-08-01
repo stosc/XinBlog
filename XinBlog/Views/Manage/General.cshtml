@@ -5,6 +5,7 @@
 @section scripts{
     <script>
         $('.gh-nav-settings-general').addClass('active');
+       
     </script>
 }
 <main class="ember-view gh-main"  role="main">
@@ -70,16 +71,11 @@
 
                     <div class="form-group">
                         <label for="postsCommentPlugin">博文评论插件</label>
-                        <textarea name="CommentPlugin" class="gh-input ember-view ember-text-field gh-input" id="postsCommentPlugin" type="text" >@Model.CommentPlugin</textarea>
-                        <input >
+                        <textarea  class="gh-input ember-view ember-text-field gh-input" id="postsCommentPlugin" type="text" >@Model.CommentPlugin</textarea>      
+                        <input type="hidden" name="CommentPlugin" value="@Model.CommentPluginBase64"    id="postsCommentPluginValue"  />           
                         <p>设置博客文章的评论插件，如插件中需要用博客文章ID替换的就用{{Id}}来表示</p>
                     </div>
                     
-
-
-
-
-                  
                 </fieldset>
             </form>
         </section>

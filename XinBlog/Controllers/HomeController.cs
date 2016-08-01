@@ -27,7 +27,7 @@ namespace XinBlog.Controllers
                 ViewBag.Cover = GeneralViewModel.Instance.Cover;
             }
         }
-        int paper = 2;
+        int paper = (int)GeneralViewModel.Instance.PostsPerPage;
         // GET: Blog
         public ActionResult Index(string pageIndex)
         {
@@ -78,6 +78,7 @@ namespace XinBlog.Controllers
         {
             if (!string.IsNullOrEmpty(id))
             {
+                ViewBag.CommentPlugin = GeneralViewModel.Instance.CommentPlugin.Replace("{{id}}",id);
                 using (var db = DbEntry.MySqlDb())
                 {
                     db.Execute("update Article set ReadCount=ReadCount+1 where id=@id", new { id = id });

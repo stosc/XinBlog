@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using XinBlog.Controllers;
 
 namespace XinBlog.Models
 {
@@ -125,10 +126,10 @@ namespace XinBlog.Models
         private static GeneralViewModel instance;
         public string Title { get; set; }
         public string Description { get; set; }
-        public string PostsPerPage { get; set; }
+        public int? PostsPerPage { get; set; }
         public string Cover { get; set; }
-        public string CommentPlugin { get; set; }        
-
+        public string CommentPlugin { get; set; }
+        public string CommentPluginBase64 { get; set; }
         public static GeneralViewModel Instance
         {
             get
@@ -139,7 +140,9 @@ namespace XinBlog.Models
                     {                        
                         var general = db.Query<GeneralViewModel>("select * from General;").FirstOrDefault();
                         if (general == null)
-                            general = new GeneralViewModel();
+                            general = new GeneralViewModel() {  PostsPerPage=10, Title="信博客", Description="信博客系统"};
+                        else
+                            general.CommentPluginBase64 = Base64.EncodeBase64(general.CommentPlugin);
                         instance = general;
                     }
                 }

@@ -139,9 +139,11 @@ namespace XinBlog.Controllers
         {
             if (general != null && general.Id > 0)
             {
+                general.CommentPluginBase64 = general.CommentPlugin;
+                general.CommentPlugin = Base64.DecodeBase64(general.CommentPlugin);
                 using (var db = DbEntry.MySqlDb())
                 {
-                    db.Execute(@"update General set Title = @Title, Cover=@Cover, Description = @Description,PostsPerPage = @PostsPerPage where id = 1", general);
+                    db.Execute(@"update General set Title = @Title, Cover=@Cover, Description = @Description,PostsPerPage = @PostsPerPage,CommentPlugin=@CommentPlugin where id = 1", general);
                     GeneralViewModel.Instance = null;
                 }
             }

@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="zh-CN"><![endif]-->
+<!--[if (gte IE 9)| IEMobile |!(IE)]><!-->
+<html class="no-js desktop landscape" lang="zh-CN">
+<!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>信博客系统管理后台</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
+    <meta name="pinterest" content="nopin">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="XinBlog">
+    <link href="/favicon.ico" rel="shortcut icon">   
+    <link href="/xin/img/touch-icon-iphone.png?v=a571c45869" rel="apple-touch-icon-precomposed">
+    <link href="/xin/img/touch-icon-ipad.png?v=a571c45869" rel="apple-touch-icon-precomposed" sizes="76x76">
+    <link href="/xin/img/small.png?v=a571c45869" rel="apple-touch-icon-precomposed" sizes="120x120">
+    <link href="/xin/img/medium.png?v=a571c45869" rel="apple-touch-icon-precomposed" sizes="152x152">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-square70x70logo" content="/xin/img/small.png?v=a571c45869">
+    <meta name="msapplication-square150x150logo" content="/xin/img/medium.png?v=a571c45869">
+    <meta name="msapplication-square310x310logo" content="/xin/img/large.png?v=a571c45869"> 
+    <link href="/xin/vendor.css?v=4b24104b0f" rel="stylesheet">
+    <link href="/xin/xin.css?v=4b24104b0f" rel="stylesheet">
+    <!-- css3-mediaqueries.js for IE8 or older -->
+    <!--[if lt IE 9]>
+       <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.
+        js"></script>
+    <![endif]-->
+    @RenderSection("styles", required: false)
+</head>
+<body class="ember-application">
+    <div class="ember-view" >
+        <div class="ember-view gh-app">
+            <a class="ember-view sr-only sr-only-focusable" href="javascript:;"></a>
+
+            <aside class="ember-view gh-alerts"></aside>
+
+            <div class="gh-viewport">
+                <nav class="ember-view gh-nav">
+                    <section class="gh-nav-body" style="margin-top:20px">
+                        
+
+                        <ul class="gh-nav-list gh-nav-main">
+                            <li><a class="ember-view gh-nav-main-editor" href="/manage/editor/"><i class="icon-pen"></i>新建博文</a></li>
+                            <li><a class="ember-view gh-nav-main-content" href="/manage/"><i class="icon-content"></i>博文列表</a></li>
+                        </ul>
+                        <ul class="gh-nav-list gh-nav-settings">
+                            <li class="gh-nav-list-h">设置</li>
+                            <li><a class="ember-view gh-nav-settings-general"  href="/manage/general/"><i class="icon-settings"></i>全局设置</a></li>
+                            <li><a class="ember-view gh-nav-settings-navigation"  href="/manage/navigation/"><i class="icon-compass"></i>导航菜单</a></li>
+
+                        </ul>
+                    </section>
+                    <footer class="gh-nav-footer">
+                        <div class="ember-view gh-menu-toggle" >
+                            <i class="icon-minimise" role="button"></i>
+                        </div>
+                        <a class="gh-nav-footer-sitelink" href="/" target="_blank">访问博客</a>
+                        <div class="gh-help-menu">
+                            <div class="ember-view closed"  role="button">
+                                <div class="gh-help-button">
+                                    <i class="icon-question"><span class="hidden">帮助</span></i>
+                                </div>
+                            </div><div class="ember-view dropdown closed fade-out closed" >
+                                <ul class="dropdown-menu dropdown-triangle-bottom" role="menu">
+                                    <li role="presentation"><a tabindex="-1" class="dropdown-item help-menu-support" role="menuitem" href="http://www.ghostchina.com/" target="_blank"><i class="icon-ambulance"></i> 支持中心</a></li>
+                                    <li role="presentation"><a tabindex="-1" class="dropdown-item help-menu-tweet" role="menuitem" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" href="https://twitter.com/intent/tweet?text=%40TryGhost+Hi%21+Can+you+help+me+with+&amp;related=TryGhost" target="_blank"><i class="icon-twitter"></i> Tweet TryGhost!</a></li>
+                                    <li class="divider"></li>
+                                    <li role="presentation"><a tabindex="-1" class="dropdown-item help-menu-how-to" role="menuitem" href="http://www.ghostchina.com/how-to-use-ghost/" target="_blank"><i class="icon-book"></i> 如何使用 Ghost</a></li>
+                                    <li role="presentation"><a tabindex="-1" class="dropdown-item help-menu-markdown" role="menuitem" href="" ><i class="icon-markdown"></i> Markdown 手册</a></li>
+                                    <li class="divider"></li>
+                                    <li role="presentation"><a tabindex="-1" class="dropdown-item help-menu-wishlist" role="menuitem" href="http://ideas.ghost.org/" target="_blank"><i class="icon-idea"></i> 心愿列表</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </footer>
+                    <div class="gh-autonav-toggle" ></div>
+                </nav>
+
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+    <script src="~/Scripts/showdown.js"></script>
+    <script>
+        (function () {
+           
+            if (window.outerWidth < 768) {
+                showEdit();
+            } else {
+                showIndex();
+            }
+        })(jQuery)
+        $(window).resize(function () {
+            if(window.outerWidth<768)
+            {
+                showEdit();
+            }else
+            {
+                showIndex();
+            }
+        });
+       
+        function showIndex()
+        {
+            $('.permalink').each(function () {
+                postId = $(this).attr('postId');
+                $(this).attr('href', '/manage/index/' + postId);
+            })
+        }
+        function showEdit() {
+            $('.permalink').each(function () {
+                postId = $(this).attr('postId');
+                $(this).attr('href', '/manage/editor/' + postId);
+            })
+        }
+    </script>
+    <script src="~/Scripts/blog.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

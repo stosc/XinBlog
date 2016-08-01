@@ -1,0 +1,104 @@
+﻿@model XinBlog.Models.GeneralViewModel
+@{
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+@section scripts{
+    <script>
+        $('.gh-nav-settings-general').addClass('active');
+    </script>
+}
+<main class="ember-view gh-main"  role="main">
+    <section class="gh-view">
+        <header class="view-header">
+            <h2 class="ember-view view-title" >
+                <button class="gh-mobilemenu-button" role="presentation" ><i class="icon-gh"><span class="sr-only">菜单</span></i></button>
+                <span>全局设置</span>
+            </h2>
+            <section class="view-actions">
+                <button class="btn btn-blue ember-view" id="btnSave">
+                    保存
+                </button>
+            </section>
+        </header>
+        <section class="view-content">
+            <form id="settings-general" action="/manage/general" method="post">
+                <input name="Id" id="generalId" value="@Model.Id" type="hidden" />
+                <fieldset>
+                    <div class="ember-view form-group">
+                        <label for="blog-title">博客名称</label>
+                        <input name="title" class="gh-input ember-view ember-text-field gh-input" id="blog-title" type="text" value="@Model.Title">
+                        <p class="ember-view response"  style="display: none;">
+                            <!---->
+                        </p>
+                        <p>为你的博客取一个响亮的名字</p>
+                    </div>
+                    <div class="description-container ember-view form-group" >
+                        <label for="blog-description">博客简介</label>
+                        <textarea name="description" class="gh-input ember-view ember-text-area gh-input" placeholder="写点什么吧..." id="blog-description">@Model.Description</textarea>
+                        <p class="ember-view response"  style="display: none;">
+                            <!---->
+                        </p>
+                        <p>
+                            简单介绍一下你的博客
+                            <span class="word-count" style="color: rgb(158, 157, 149);">172</span>
+                        </p>
+                    </div>
+                </fieldset>
+                @*<div class="form-group">
+                        <label>博客 Logo</label>
+                        <button class="btn btn-green js-modal-logo" type="button" >上传图片</button>
+                        <p>为博客设置一个 logo</p>
+                    </div>*@
+                <div class="form-group">
+                    <label>博客封面图</label>                   
+                        <section class="ember-view js-post-image-upload pre-image-uploader" id="cover_img" style="height: auto; min-height: 0px; opacity: 100;display:@(string.IsNullOrEmpty(Model.Cover)?"none":"block")" data-uploaderui="true">
+                            <img width="301" height="272" class="js-upload-target" style="display: block;" src="@Model.Cover">
+                            <a title="删除" class="image-cancel icon-trash js-cancel del_cover" >
+                                <span class="hidden">删除</span>
+                            </a>
+                        </section>                   
+                    <button class="btn btn-green js-modal-cover" type="button">上传图片</button>
+                    <input type="hidden" id="cover" name="Cover" value="@Model.Cover" />
+                    <p>为你的博客设置一个个性的封面图</p>
+                </div>
+                <fieldset>
+                    <div class="form-group">
+                        <label for="postsPerPage">每页显示博文数</label>
+                        <input name="postsPerPage" class="gh-input ember-view ember-text-field gh-input" id="postsPerPage" type="number" min="1" max="1000" pattern="[0-9]*" value="@Model.PostsPerPage">
+                        <p>设置每页显示博文的数量</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postsCommentPlugin">博文评论插件</label>
+                        <textarea name="CommentPlugin" class="gh-input ember-view ember-text-field gh-input" id="postsCommentPlugin" type="text" >@Model.CommentPlugin</textarea>
+                        <input >
+                        <p>设置博客文章的评论插件，如插件中需要用博客文章ID替换的就用{{Id}}来表示</p>
+                    </div>
+                    
+
+
+
+
+                  
+                </fieldset>
+            </form>
+        </section>
+    </section>
+</main>
+
+<div class="ember-view" id="insert_img_view" style="display:none;">
+    <div class="modal-container js-modal-container fade-in open" >
+        <article class="modal-action modal-style-wide js-modal open">
+            <section class="modal-content">
+                <div id="aimg0">
+
+                </div>
+                <footer class="modal-footer">
+                    <button class="btn btn-default btn-minor btn-minor js-button-reject" type="button" id="cancel_insert">取消</button><button class="btn btn-red js-button-accept" type="button" id="ok_insert_cover">插入</button>
+                </footer>
+            </section>
+        </article>
+    </div>
+    <div class="modal-background js-modal-background fade-in open"></div>
+</div>
+

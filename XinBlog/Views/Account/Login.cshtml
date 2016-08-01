@@ -1,0 +1,62 @@
+﻿@using XinBlog.Models
+@model LoginViewModel
+@{
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+    ViewBag.Title = "登陆";
+}
+
+    <div class="ember-view" >
+        <div class="ember-view gh-app" >
+            <a class="ember-view sr-only sr-only-focusable"  href="javascript:;">Skip to main content</a>
+            <aside class="ember-view gh-alerts" ><!----></aside>
+            <div class="gh-viewport   ">
+                <!---->
+                <main class="ember-view gh-main"  role="main">
+                    <div class="gh-flow">
+                        <div class="gh-flow-content-wrap">
+                            <section class="gh-flow-content">
+                                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "gh-signin", role = "form", novalidate = "novalidate" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="ember-view form-group success" >
+                                        <span class="input-icon icon-mail">
+                                           <!--<input name="identification" tabindex="1" class="gh-input email ember-view ember-text-field gh-input"  autofocus="" type="email" placeholder="邮箱地址" autocapitalize="off" autocorrect="off">-->
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "gh-input email ember-view ember-text-field gh-input" })
+                                        </span>
+                                    </div><div class="ember-view form-group" >
+                                        <span class="input-icon icon-lock forgotten-wrap">
+                                            @*<input name="password" tabindex="2" class="password ember-view ember-text-field gh-input"  type="password" placeholder="密码" autocorrect="off">*@
+                                            @Html.PasswordFor(m => m.Password, new { @class = "password ember-view ember-text-field gh-input" })
+                                            <button tabindex="4" class="forgotten-link btn btn-link ember-view"  type="button">
+                                                忘记密码？
+                                            </button>
+                                        </span>
+                                    </div>                <button tabindex="3" class="login btn btn-blue btn-block ember-view"  type="submit">
+                                        登录
+                                    </button>
+                                
+                               
+                                }
+                                <p class="main-error">
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </p>
+                            </section>
+                        </div>
+                    </div>
+                </main>
+                <aside class="ember-view gh-notifications" ><!----></aside>
+                <div class="ember-view content-cover" ><!----></div>
+                <!---->
+                <!---->
+            </div>
+        </div>
+    </div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

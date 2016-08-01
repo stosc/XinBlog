@@ -1,0 +1,44 @@
+﻿<nav class="ember-view gh-nav" >  
+    <section class="gh-nav-body">
+        <section class="gh-nav-search">
+            <div class="gh-nav-search-input ember-view" >
+                <select tabindex="-1" class="ember-view ember-selectize selectized"  style="display: none;" autocomplete="off"><option selected="selected" value=""></option></select><div class="selectize-control ember-view ember-selectize multi plugin-remove_button"><div class="selectize-input items not-full has-options"><input tabindex="0" style="left: 0px; width: 30px; position: relative; opacity: 1;" type="text" placeholder="搜索" autocomplete="off"></div><div class="selectize-dropdown multi ember-view ember-selectize plugin-remove_button" style="left: 0px; top: 31px; width: 205px; display: none; visibility: visible;"><div class="selectize-dropdown-content"><div class="optgroup" data-group="Posts"><div class="optgroup-header">Posts</div><div class="option" data-value="post.2" data-selectable="">(Untitled)</div><div class="option" data-value="post.1" data-selectable="">欢迎使用 Ghost 博客系统</div></div><div class="optgroup" data-group="Users"><div class="optgroup-header">Users</div><div class="option" data-value="user.stosc" data-selectable="">stosc</div></div><div class="optgroup" data-group="Tags"><div class="optgroup-header">Tags</div><div class="option" data-value="tag.getting-started" data-selectable="">系统简介</div></div></div><div class="dropdown-empty-message" style="display: none;">未找到…</div></div></div>
+                <button class="gh-nav-search-button" ><i class="icon-search"></i><span class="sr-only">搜索</span></button>
+            </div>
+        </section>
+
+        <ul class="gh-nav-list gh-nav-main">
+            <li><a class="ember-view gh-nav-main-editor"  href="/manage/editor/"><i class="icon-pen"></i>新建博文</a></li>
+            <li><a class="ember-view gh-nav-main-content active"  href="/manage/"><i class="icon-content"></i>博文列表</a></li>           
+        </ul>
+        <ul class="gh-nav-list gh-nav-settings">
+            <li class="gh-nav-list-h">设置</li>
+            <li><a class="ember-view gh-nav-settings-general"  href="/manage/general/"><i class="icon-settings"></i>全局设置</a></li>
+            <li><a class="ember-view gh-nav-settings-navigation"  href="/manage/navigation/"><i class="icon-compass"></i>导航菜单</a></li>         
+        </ul>
+    </section>
+    <footer class="gh-nav-footer">
+        <div class="ember-view gh-menu-toggle" >
+            <i class="icon-minimise" role="button"></i>
+        </div>
+        <a class="gh-nav-footer-sitelink" href="/" target="_blank">访问博客</a>
+        <div class="gh-help-menu">
+            <div class="ember-view closed"  role="button">
+                <div class="gh-help-button">
+                    <i class="icon-question"><span class="hidden">帮助</span></i>
+                </div>
+            </div><div class="ember-view dropdown closed fade-out closed" >
+                <ul class="dropdown-menu dropdown-triangle-bottom" role="menu">
+                    <li role="presentation"><a tabindex="-1" class="dropdown-item help-menu-support" role="menuitem" href="http://www.stosc.cc/" target="_blank"><i class="icon-ambulance"></i> 支持中心</a></li>
+                    <li role="presentation"><a tabindex="-1" class="dropdown-item help-menu-tweet" role="menuitem" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" href="https://twitter.com/intent/tweet?text=%40TryGhost+Hi%21+Can+you+help+me+with+&amp;related=TryGhost" target="_blank"><i class="icon-twitter"></i> Tweet TryGhost!</a></li>
+                    <li class="divider"></li>
+                    <li role="presentation"><a tabindex="-1" class="dropdown-item help-menu-how-to" role="menuitem" href="http://www.stosc.cc/how-to-use/" target="_blank"><i class="icon-book"></i> 如何使用 XinBlog</a></li>
+                    <li role="presentation"><a tabindex="-1" class="dropdown-item help-menu-markdown" role="menuitem" href="" ><i class="icon-markdown"></i> Markdown 手册</a></li>
+                    <li class="divider"></li>
+                    <li role="presentation"><a tabindex="-1" class="dropdown-item help-menu-wishlist" role="menuitem" href="http://ideas.stos.cc/" target="_blank"><i class="icon-idea"></i> 心愿列表</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <div class="gh-autonav-toggle" ></div>
+</nav>

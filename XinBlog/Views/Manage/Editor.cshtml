@@ -1,0 +1,332 @@
+﻿@model XinBlog.Models.Article
+@{
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+@section scripts{
+    <script>
+        preHtml();        
+        $('.ember-application').addClass('editor');
+        $('.gh-nav-main-editor').addClass('active');
+</script>
+}
+
+<main class="ember-view gh-main" role="main">
+    <input type="hidden" name="ArticleId" value="@Model.Id" id="ArticleId" />
+    <input type="hidden" name="IsPublish" value="@(Model.IsPublish?"1":"0")" id="IsPublish" />
+    <input type="hidden" name="AbstractImg" value="@Model.AbstractImg" id="AbstractImg" />
+    <input type="hidden" name="Host" value="@ViewBag.Host" id="Host" />
+    <section class="ember-view gh-view">
+        <header class="view-header">
+            <h2 class="ember-view view-title gh-editor-title">
+                <button class="gh-mobilemenu-button"><i class="icon-gh"><span class="sr-only">菜单</span></i></button>
+                <input tabindex="1" class="ember-view ember-text-field gh-input" id="Article_title" name="Title" value="@Model.Title" autofocus="" type="text" placeholder="博文标题">
+            </h2>        <section class="view-actions">
+                <button title="博文设置" class="post-settings" type="button" onclick="openSetting()">
+                    <i class="icon-settings"></i>
+                </button>
+                <section class="ember-view splitbtn js-publish-splitbutton unsaved">
+                    <button class="btn btn-sm js-publish-button btn-blue  ember-view btn_saveArt" id="action" type="button">
+                        保存草稿
+                    </button>
+                    <button class="btn btn-sm btn-blue  dropdown-toggle up  ember-view closed" id="save" onclick="saveClick()">
+                        <i class="options icon-arrow2"></i>
+                        <span class="sr-only">Toggle Settings Menu</span>
+                    </button><div class="ember-view dropdown editor-options closed fade-out closed" id="saveMenu">
+                        <ul class="dropdown-menu dropdown-triangle-bottom-right">
+                            <li class="post-save-publish m" id="a_pub">
+                                <a href="javascript:;">立即发布</a>
+                            </li>
+                            <li class="post-save-draft active m" id="a_save">
+                                <a href="javascript:;">保存草稿</a>
+                            </li>
+                            <li class="divider delete"></li>
+                            <li class="delete" id="btn_del">
+                                <a href="javascript:;">删除博文</a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+        </header>
+        <section class="view-container view-editor">
+            <section class="entry-markdown js-entry-markdown active" id="s_md">
+                <header class="floatingheader">
+                    <span class="desktop-tabs">Markdown</span>
+                    <span class="desktop-tabs" id="toList">列表</span>
+                    <span class="mobile-tabs">
+                        <a href="javascript:;" class="btn_md active">Markdown</a>
+                        <a href="javascript:;" class="btn_pre">预览</a>
+                    </span>
+                    <a title="插入图片" class="" href="javascript:void(0);" style="font-size:16px;" onclick="insertImg();">
+                        <i class="icon-photos"></i>
+                    </a>
+                    <a title="Markdown 手册" class="markdown-help" href="javascript:void(0);" onclick="openMkHelp();">
+                        <i class="icon-markdown"></i>
+                    </a>
+                </header>
+                <section class="entry-markdown-content" id="entry-markdown-content">
+                    <textarea tabindex="1" name="Content" class="ember-view ember-text-area markdown-editor js-markdown-editor" id="postContent"   spellcheck="true" oninput="preHtml(this)" >@Model.Content</textarea>
+                </section>
+            </section>
+            <section class="entry-preview js-entry-preview " id="s_pre">
+                <header class="floatingheader">
+                    <span class="desktop-tabs">预览</span>
+                    <span class="mobile-tabs">
+                        <a href="javascript:;" class="btn_md active">Markdown</a>
+                        <a href="javascript:;" class="btn_pre">预览</a>
+                    </span>
+                    <span class="entry-word-count" id="contentCount">0 个字</span>
+                </header>
+                <section class="entry-preview-content js-entry-preview-content" id="preSec">
+                    <div class="ember-view rendered-markdown js-rendered-markdown" id="preHtml">
+
+                    </div>
+                </section>
+            </section>
+        </section>
+    </section>
+
+</main>
+
+<div class="ember-view" id="mkHelp" style="display:none;">
+    <div class="modal-container js-modal-container fade-in open" >
+        <article class="modal modal-style-wide js-modal open">
+            <section class="modal-content" >
+                <header class="modal-header"><h1>Markdown 手册</h1></header>
+                <a title="关闭" class="close icon-x" href="javascript:void(0);" onclick="closeMkHelp();"><span class="hidden">关闭</span></a>
+                <section class="modal-body">
+                    <section class="markdown-help-container">
+                        <table class="modal-markdown-help-table">
+                            <thead>
+                                <tr>
+                                    <th>Markdown</th>
+                                    <th>效果</th>
+                                    <th>快捷键</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>**text**</td>
+                                    <td><strong>Bold</strong></td>
+                                    <td>Ctrl/⌘ + B </td>
+                                </tr>
+                                <tr>
+                                    <td>*text*</td>
+                                    <td><em>Emphasize</em></td>
+                                    <td>Ctrl/⌘ + I</td>
+                                </tr>
+                                <tr>
+                                    <td>~~text~~</td>
+                                    <td><del>Strike-through</del></td>
+                                    <td>Ctrl + Alt + U</td>
+                                </tr>
+                                <tr>
+                                    <td>[title](http://)</td>
+                                    <td><a href="#">Link</a></td>
+                                    <td>Ctrl/⌘ + K</td>
+                                </tr>
+                                <tr>
+                                    <td>`code`</td>
+                                    <td><code>Inline Code</code></td>
+                                    <td>Ctrl/⌘ + Shift + K</td>
+                                </tr>
+                                <tr>
+                                    <td>![alt](http://)</td>
+                                    <td>Image</td>
+                                    <td>Ctrl/⌘ + Shift + I</td>
+                                </tr>
+                                <tr>
+                                    <td>* item</td>
+                                    <td>List</td>
+                                    <td>Ctrl + L</td>
+                                </tr>
+                                <tr>
+                                    <td>&gt; quote</td>
+                                    <td>Blockquote</td>
+                                    <td>Ctrl + Q</td>
+                                </tr>
+                                <tr>
+                                    <td>==Highlight==</td>
+                                    <td><mark>Highlight</mark></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td># Heading</td>
+                                    <td>H1</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>## Heading</td>
+                                    <td>H2</td>
+                                    <td>Ctrl/⌘ + H</td>
+                                </tr>
+                                <tr>
+                                    <td>### Heading</td>
+                                    <td>H3</td>
+                                    <td>Ctrl/⌘ + H (x2)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        如需了解更多 Markdown 语法，请查看 <a href="http://www.stosc.cc/markdown-guide/" target="_blank">Markdown 语法指南</a>。
+                    </section>
+                </section>
+            </section>
+        </article>
+    </div>
+    <div class="modal-background js-modal-background fade-in open"></div>
+</div>
+<div class="ember-view" id="del_view" style="display:none;">
+    <div class="modal-container js-modal-container fade-in open" >
+        <article class="modal-action modal-style-wide js-modal open">
+            <section class="modal-content" >
+                <header class="modal-header"><h1>确认要删除此博文吗？</h1></header>
+                <a title="关闭" class="close icon-x" href="" ><span class="hidden">关闭</span></a>
+                <section class="modal-body">
+                    <p>即将删除 "<strong id="title_del"></strong>"。<br>此操作不可逆！没有备份、不能恢复、没有后悔药。 <br> 这是最后警告！小心！</p>
+                </section>
+                <footer class="modal-footer">
+                    <button class="btn btn-default btn-minor btn-minor js-button-reject" type="button" id="cancel_del">取消</button><button class="btn btn-red js-button-accept" type="button" id="ok_del">删除</button>
+                </footer>
+            </section>
+        </article>
+    </div>
+    <div class="modal-background js-modal-background fade-in open"></div>
+</div>
+<div class="ember-view" id="insert_img_view" style="display:none;">
+    <div class="modal-container js-modal-container fade-in open" >
+        <article class="modal-action modal-style-wide js-modal open">
+            <section class="modal-content">
+                <div id="aimg0">
+
+                </div>
+                <footer class="modal-footer">
+                    <button class="btn btn-default btn-minor btn-minor js-button-reject" type="button" id="cancel_insert">取消</button><button class="btn btn-red js-button-accept" type="button" id="ok_insert">插入</button>
+                </footer>
+            </section>
+        </article>
+    </div>
+    <div class="modal-background js-modal-background fade-in open"></div>
+</div>
+<div class="settings-menu-container ember-view" id="entry-controls">
+    <div id="entry-controls">
+        <div class="settings-menu-pane-in settings-menu settings-menu-pane" id="setting">
+            <div class="settings-menu-header">
+                <h4>博文设置</h4>
+                <button class="close icon-x settings-menu-header-action" onclick="closeSetting()"><span class="hidden">关闭</span></button>
+            </div>
+            <div class="settings-menu-content">
+                <div id="aimg">
+                    <section class="ember-view js-post-image-upload image-uploader" id="upimg" style="height: auto; min-height: 0px; opacity: 100;" data-uploaderui="true">
+                        <span class="media" style="opacity: 0;">
+                            <span class="hidden">上传图片</span>
+                        </span>
+                        <img width="301" height="169" class="js-upload-target" style="display: none;" src="">
+                        <div class="description" style="opacity: 100;">
+                            为博文设置图片<strong></strong>
+                        </div>
+                        <input name="uploadimage" id="ai" onchange="uploadFile()" class="gh-input js-fileupload main fileupload" type="file" data-url="upload">
+                        <div class="js-fail failed" style="display: none">发生故障了：(</div>
+                        <div class="js-upload-progress progress progress-success active" role="progressbar" id="pb" aria-valuemin="0" aria-valuemax="100" style="opacity: 100; display:none;">
+                            <div class="js-upload-progress-bar bar" id="son" style="width:0%"></div>
+                        </div>
+                        <a title="添加图片地址（URL）" class="image-url" onclick="addImgPath('upimg', 'imgUrl', 'AbstractImg','')">
+                            <i class="icon-link">
+                                <span class="hidden">URL</span>
+                            </i>
+                        </a>
+                    </section>
+                </div>
+                <div class="form-group">
+                    <label for="url">博文地址</label>
+                    <a class="post-view-link" href="@ViewBag.Url" target="_blank">
+                        预览 <i class="icon-external"></i>
+                    </a>
+                    <span class="input-icon icon-link">
+                        <input name="post-setting-slug" class="post-setting-slug ember-view ember-text-field gh-input" id="url" value="@ViewBag.Url" type="text">
+                    </span>
+                    <p class="ember-view ghost-url-preview description">
+                        @ViewBag.Url
+                    </p>
+                </div>
+                <div class="ember-view form-group" >
+                    <label for="post-setting-date">发布日期</label>
+                    <span class="ember-view input-icon icon-calendar" >
+                        <input name="post-setting-date" class="post-setting-date ember-view ember-text-field gh-input" id="post-setting-date" readonly="readonly" value="@Model.CreateDate" type="text">
+                    </span>
+                    <p class="ember-view response"  style="display: none;">
+                        <!---->
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label for="tag-input">标签</label>
+                    <select tabindex="-1" class="ember-view ember-selectize selectized" id="tag-input" style="display: none;" multiple="multiple" autocomplete="off"></select>
+                    <div class="selectize-control ember-view ember-selectize multi plugin-remove_button plugin-drag_drop">
+                        <div class="selectize-input items not-full ui-sortable">
+                            <input tabindex="0" type="text" autocomplete="off" class="post-setting-slug ember-view ember-text-field gh-input" id="tags" value="@Model.Tags">
+                        </div>
+                        <div class="selectize-dropdown multi ember-view ember-selectize plugin-remove_button plugin-drag_drop" style="display: none;">
+                            <div class="selectize-dropdown-content">
+                                <div class="option active" data-value="bc8e2a9e-7ad4-4b98-8e16-1de91a984e42" data-selectable="">系统简介</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav-list nav-list-block">
+                    <li class="ember-view nav-list-item" >
+                        <button type="button" onclick="openSEO()">
+                            <b>搜索引擎优化</b>
+                            <span>优化在搜索引擎中的呈现效果，提高访问量。</span>
+                        </button>
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                </ul>
+                <div class="form-group for-checkbox">
+                    <label class="checkbox" for="static-page">
+                        <input name="static-page" class="gh-input post-setting-static-page ember-view ember-checkbox sucaijiayuan" @(Model.IsSeparate ? "checked='checked'" : "") id="IsSeparate" type="checkbox">
+                        <span class="input-toggle-component is"></span>
+                        <p>设置为独立页面（不出现在博文列表中）</p>
+                    </label>
+                    <label class="checkbox" for="featured">
+                        <input name="featured" class="gh-input post-setting-featured ember-view ember-checkbox sucaijiayuan" @(Model.IsRecommend ? "checked='checked'" : "") id="IsRecommend" type="checkbox">
+                        <span class="input-toggle-component if"></span>
+                        <p>推荐此博文（可以设置特殊的展示效果）</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="settings-menu-pane-out-right settings-menu settings-menu-pane" id="seo">
+            <div class="ember-view active">
+                <div class="settings-menu-header subview">
+                    <button class="back icon-arrow-left settings-menu-header-action" onclick="closeSEO()"><span class="hidden">返回</span></button>
+                    <h4>搜索引擎优化</h4>
+                    <div style="width: 23px;"></div>
+                </div>
+                <div class="settings-menu-content">
+                    <div class="ember-view form-group" >
+                        <label for="meta-title">优化标题</label>
+                        <input name="post-setting-meta-title" class="post-setting-meta-title ember-view ember-text-field gh-input" value="@Model.MetaTitle" id="MetaTitle" type="text">
+                        <p>建议：<b>70</b> 个字符以内。已输入的字符数是 <span class="word-count" style="color: rgb(159, 187, 88);" id="mtCount">0</span></p>
+                        <p class="ember-view response"  style="display: none;">
+                        </p>
+                    </div>
+                    <div class="ember-view form-group" >
+                        <label for="meta-description">优化摘要</label>
+                        <textarea name="post-setting-meta-description" class="gh-input post-setting-meta-description ember-view ember-text-area gh-input" value="@Model.MetaDescription" id="MetaDescription"></textarea>
+                        <p>建议：<b>156</b> 个字符以内。已输入的字符数是 <span class="word-count" style="color: rgb(159, 187, 88);" id="mdCount">0</span></p>
+                        <p class="ember-view response"  style="display: none;">
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label>搜索引擎呈现效果预览</label>
+                        <div class="seo-preview">
+                            <div class="seo-preview-title">未定义</div>
+                            <div class="seo-preview-link">http://localhost:2368/untitled-2/</div>
+                            <div class="seo-preview-description"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

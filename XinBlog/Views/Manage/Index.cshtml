@@ -1,0 +1,84 @@
+﻿@model IEnumerable<XinBlog.Models.ArticleEditMeta>
+@{
+     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+@section scripts{
+    <script>
+        $('.gh-nav-main-content').addClass('active');
+    </script>
+}
+<main class="ember-view gh-main"  role="main">
+    <section class="ember-view gh-view content-view-container" >
+        <header class="view-header">
+            <h2 class="ember-view view-title" >
+                <button class="gh-mobilemenu-button" role="presentation" ><i class="icon-gh"><span class="sr-only">菜单</span></i></button>
+                <span>博文列表</span>
+            </h2>
+            <section class="view-actions">
+                <a title="新建博文" class="btn btn-green ember-view"  href="/manage/editor/">新建博文</a>
+            </section>
+        </header>
+
+        <div class="view-container">
+            <section class="content-list js-content-list ">
+                <section class="ember-view content-list-content js-content-scrollbox" >
+                    <ol class="posts-list">
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <li class="ember-view @(ViewBag.ArticleId == item.Id?"active":"")">                                    
+                                    <a title="编辑此博文" class="permalink" href="/manage/index/@item.Id" postId="@item.Id">
+                                        <h3 class="entry-title">@item.Title</h3>
+                                        <section class="entry-meta">
+                                            <span class="avatar" style='background-image: url("/shared/img/user-image.png");'>
+                                                <img title="stosc" src="/shared/img/user-image.png">
+                                            </span>
+                                            <span class="author">stosc</span>
+                                            <span class="status">
+                                                @if (item.IsPublish)
+                                                {
+                                                    <time class="date published">
+                                                        发布于 @item.PubTime
+                                                    </time>
+                                                }
+                                                else
+                                                {
+                                                    <span class="draft">草稿</span>
+                                                }
+                                            </span>
+                                        </section>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ol>
+
+                </section>
+            </section>
+            <section class="content-preview js-content-preview ">
+                <section class="post-controls">
+                    <a title="编辑此博文" class="btn btn-minor post-edit ember-view"  href="/manage/editor/@ViewBag.ArticleId/"><i class="icon-edit"></i></a>
+                </section>
+
+                <section class="ember-view content-preview-content" >
+                    <div class="wrapper">
+                        <h1 class="content-preview-title">
+                            <a class="ember-view"  href="/manage/editor/@ViewBag.ArticleId/">
+                                @ViewBag.ArticleTitle
+                            </a>
+                        </h1>
+                        @Html.Raw(ViewBag.ArticleContent)
+                    </div>
+
+                </section>
+            </section>
+        </div>
+
+    </section>
+</main>
+
+<aside class="ember-view gh-notifications" ><!----></aside>
+
+<div class="ember-view content-cover" ><!----></div>

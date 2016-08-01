@@ -1,0 +1,118 @@
+﻿@model XinBlog.Models.Article
+@{
+    if(Model != null)
+    {
+        ViewBag.Title = Model.Title;
+        ViewBag.MetaTitle = Model.MetaTitle;
+        ViewBag.MetaDescription = Model.MetaDescription;
+        ViewBag.Tags = Model.Tags;
+    }
+}
+@section styles{
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/8.5/styles/monokai_sublime.min.css">
+    <link href="//cdn.bootcss.com/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/screen.css?v=82931f6358" />
+}
+
+
+<!-- start site's main content area -->
+<section class="content-wrap" style="margin-top:2em">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-12 main-content">
+                <article id="67" class="post tag-laravel-5 tag-getting-started-with-laravel tag-laravel-5-2">
+                    <header class="post-head">
+                        <h1 class="post-title">@Model.Title</h1>
+                        <section class="post-meta">
+                            <span class="author">阅读次数：@Model.ReadCount</span> &bull;
+                            <time class="post-date">@Model.CreateDate.Date.ToString("yyyy年MM月dd日")</time>
+                        </section>
+                    </header>
+                    @if (!string.IsNullOrEmpty(Model.AbstractImg))
+                    {
+                        <section class="featured-media">
+                            <img src="@Model.AbstractImg" alt="@Model.Title">
+                        </section>
+                    }
+                    <section class="post-content">
+                        @Html.Raw(Model.Content)
+                    </section>
+                    <footer class="post-footer clearfix">
+                        <div class="pull-left tag-list">
+                            <i class="fa fa-tags"></i>
+                            @{
+                                if (Model.Tags != null)
+                                {
+                                    var ts = Model.Tags.Split(',');
+                                    foreach (var t in ts)
+                                    {
+                                        <a href="/tag/@t/">@t</a>
+                                    }
+                                }
+                            }
+                        </div>
+                        <div class="pull-right share">
+                        </div>
+                    </footer>
+                </article>
+
+                @*<div class="about-author clearfix">
+                        <a href="/author/stosc/"><img src="" alt="stosc" class="avatar pull-left"></a>
+
+                        <div class="details">
+                            <div class="author">
+                                关于作者 <a href="/author/stosc/">stosc</a>
+                            </div>
+                            <div class="meta-info">
+                                <span class="loaction"><i class="fa fa-home"></i>北京</span>
+                                <span class="website"><i class="fa fa-globe"></i><a href="http://stosc.cc" targer="_blank">个人网站/博客</a></span>
+                            </div>
+                            <div class="bio">
+                                Asp.net MVC 开源博客 XinBlog 作者。
+                            </div>
+                        </div>
+                    </div>*@
+                @if (ViewBag.IsPre != null)
+                {
+                    <div class="prev-next-wrap clearfix">
+                        @if (ViewBag.PrvId != 0)
+                        {
+                            <a class="btn btn-default" href="/Blog/Article/@ViewBag.PrvId"><i class="fa fa-angle-left fa-fw"></i>@ViewBag.PrvTitle</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-default" href="/Blog/"><i class="fa fa-angle-left fa-fw"></i> 这是最后一篇</a>
+                        }
+
+                        &nbsp;
+                        @if (ViewBag.NextId != 0)
+                        {
+                            <a class="btn btn-default" href="/Blog/Article/@ViewBag.NextId">@ViewBag.NextTitle <i class="fa fa-angle-right fa-fw"></i></a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-default" href="/Blog/">这是第一篇 <i class="fa fa-angle-right fa-fw"></i></a>
+                        }
+                    </div>
+
+                    <div class="post tag-laravel-5 tag-getting-started-with-laravel tag-laravel-5-2">
+
+                        <div id="SOHUCS" sid="@Model.Id"></div>
+                        <script type="text/javascript">
+                            (function () {
+                                var appid = 'cysuFfpdk';
+                                var conf = 'prod_1b5668eada44a2a7522d9ef0be50b0e8';
+                                var width = window.innerWidth || document.documentElement.clientWidth;
+                                if (width < 960) {
+                                    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+                                } else { var loadJs = function (d, a) { var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement; var b = document.createElement("script"); b.setAttribute("type", "text/javascript"); b.setAttribute("charset", "UTF-8"); b.setAttribute("src", d); if (typeof a === "function") { if (window.attachEvent) { b.onreadystatechange = function () { var e = b.readyState; if (e === "loaded" || e === "complete") { b.onreadystatechange = null; a() } } } else { b.onload = a } } c.appendChild(b) }; loadJs("http://changyan.sohu.com/upload/changyan.js", function () { window.changyan.api.config({ appid: appid, conf: conf }) }); }
+                            })(); </script>
+
+                    </div>
+                }
+            </main>           
+        </div>
+    </div>
+</section>

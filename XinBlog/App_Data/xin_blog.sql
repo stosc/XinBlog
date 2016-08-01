@@ -16,6 +16,20 @@ USE `xin_blog`;
 
 
 -- 导出  表 xin_blog.article 结构
+-- --------------------------------------------------------
+-- 主机:                           127.0.0.1
+-- 服务器版本:                        5.6.10 - MySQL Community Server (GPL)
+-- 服务器操作系统:                      Win32
+-- HeidiSQL 版本:                  9.1.0.4867
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- 导出  表 xin_blog.article 结构
+DROP TABLE IF EXISTS `article`;
 CREATE TABLE IF NOT EXISTS `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Guid` varchar(50) DEFAULT NULL,
@@ -30,10 +44,16 @@ CREATE TABLE IF NOT EXISTS `article` (
   `IsPublish` tinyint(1) NOT NULL DEFAULT '0' COMMENT '发布',
   `IsRecommend` tinyint(1) NOT NULL DEFAULT '0' COMMENT '推荐',
   `IsSeparate` tinyint(1) NOT NULL DEFAULT '0' COMMENT '独立页面',
-  `ReadCount` int(11) DEFAULT NULL COMMENT '阅读计数',
+  `ReadCount` int(11) DEFAULT '0' COMMENT '阅读计数',
   PRIMARY KEY (`id`),
   KEY `Index 2` (`Guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 数据导出被取消选择。
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
 
 -- 数据导出被取消选择。
 
